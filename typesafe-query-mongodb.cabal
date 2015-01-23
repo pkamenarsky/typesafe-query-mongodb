@@ -31,6 +31,7 @@ library
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.6 && <4.7,
+                       bson >= 0.3 && <0.4,
                        typesafe-query < 0.2,
                        mongoDB > 2.0 && <2.1
   hs-source-dirs:      src
