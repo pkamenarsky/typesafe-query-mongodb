@@ -1,6 +1,10 @@
-{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses, OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts, MultiParamTypeClasses, OverloadedStrings #-}
 
 module Database.MongoDB.Query.Typesafe where
+
+import           Control.Monad.IO.Class
+import           Control.Monad.Trans.Control
+
 
 import           Data.Bson
 import           Data.Word
@@ -57,5 +61,8 @@ tsQueryToSelector (QNot q)       = [ "$not" =: tsQueryToSelector q ]
 
 --
 
--- find :: (DB.MonadIO m, DB.MonadBaseControl IO m) => TSQuery -> DB.Action m DB.Cursor
-find tsq = DB.find (query (tsQueryToSelector tsq) "")
+qtype :: QueryExp a -> a
+qtype = undefined
+
+find :: (Nameable a, MonadIO m, MonadBaseControl IO m) => QueryExp a -> DB.Action m DB.Cursor
+find tsq = DB.find (query (tsQueryToSelector tsq) (name $ qtype tsq))

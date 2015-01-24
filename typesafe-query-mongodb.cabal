@@ -33,6 +33,8 @@ library
   build-depends:       base >=4.6 && <4.7,
                        bson >= 0.3 && <0.4,
                        typesafe-query < 0.2,
-                       mongoDB > 2.0 && <2.1
+                       mongoDB > 2.0 && <2.1,
+                       monad-control,
+                       transformers
   hs-source-dirs:      src
   default-language:    Haskell2010
